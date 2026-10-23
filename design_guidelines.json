@@ -1,0 +1,128 @@
+{
+  "project_context": {
+    "app_type": "institutional_website",
+    "business_name": "Borcioni Design e Comunicação",
+    "slogan": "Marcas que comunicam. Ideias que permanecem.",
+    "positioning": "Mais valor, menos preço",
+    "location": "Sapiranga (RS) e região",
+    "contact": {
+      "whatsapp": "(51) 99889-3041",
+      "email": "borcionidesign@gmail.com"
+    },
+    "language": "pt-BR"
+  },
+  "typography": {
+    "rules": "DO NOT use Inter or standard sans. Adhere strictly to the requested font families.",
+    "h1_h2": {
+      "family": "'Montserrat', sans-serif",
+      "note": "Fallback for Gotham (licensed). Use Montserrat with similar tracking and weight."
+    },
+    "h3_h4": {
+      "family": "'Roboto', sans-serif",
+      "note": "Used for subheadings, category titles."
+    },
+    "body": {
+      "family": "'Helvetica', 'Arial', sans-serif",
+      "note": "Main body copy for legibility."
+    },
+    "ui_elements": {
+      "family": "'Nunito', sans-serif",
+      "note": "Used for buttons, forms, and highlights."
+    },
+    "scale": {
+      "h1": "text-4xl sm:text-5xl lg:text-6xl tracking-tighter font-black",
+      "h2": "text-2xl sm:text-3xl lg:text-4xl tracking-tight font-bold",
+      "h3": "text-xl sm:text-2xl font-semibold",
+      "body": "text-base leading-relaxed",
+      "labels": "text-xs tracking-[0.2em] uppercase font-bold"
+    }
+  },
+  "colors": {
+    "strategy": "High contrast hybrid mode. Dark hero sections (black/purple) and light content sections (white/off-white) to balance sophistication and readability.",
+    "primary": "#9333EA",
+    "primary_hover": "#A855F7",
+    "primary_dark": "#7E22CE",
+    "background_dark": "#0A0A0A",
+    "background_light": "#FAFAFA",
+    "surface_dark": "#171717",
+    "surface_light": "#FFFFFF",
+    "text_dark_theme": "#FFFFFF",
+    "text_light_theme": "#171717",
+    "muted_dark": "#A3A3A3",
+    "muted_light": "#525252",
+    "border_dark": "rgba(255, 255, 255, 0.1)",
+    "border_light": "rgba(0, 0, 0, 0.1)"
+  },
+  "visual_enhancers": {
+    "surfaces": "Use crisp borders and subtle nested radii (max 8px). For dark sections, rely on 1px subtle borders (border-white/10) to separate elements rather than flat grays.",
+    "textures": "In dark heroes, incorporate subtle grain or noise over the background image, utilizing heavy black/purple overlays (e.g., bg-black/60 to bg-black/80) to ensure the white logo and text stand out perfectly.",
+    "shadows": "Ambient diffuse shadows for light mode cards (shadow-[0_8px_32px_rgba(0,0,0,0.06)]). No soft shadows in dark mode, use border highlights instead."
+  },
+  "grids_and_layouts": {
+    "spacing": "Generous spacing. Use py-24 to py-32 for major sections. Component internal padding should be p-6 or p-8.",
+    "services_section": "Bento Grid approach. Highlight the 'Supermarket Advertising' as the dominant feature tile (col-span-full md:col-span-2) with a rich purple accent, while other services (Branding, Social Media) occupy standard tiles.",
+    "portfolio_section": "Filterable masonry or standard responsive grid (grid-cols-1 md:grid-cols-2 lg:grid-cols-3) gap-8.",
+    "general": "Ensure sections alternate visually between dark (hero, footer, CTA banners) and light (services, about, portfolio) to maintain rhythm."
+  },
+  "motion": {
+    "interactions": "Subtle hover lifts (-translate-y-1) on cards. Buttons should have color transitions and scale slightly on active.",
+    "entrances": "Staggered fade-up for portfolio items and service cards.",
+    "accessibility": "Respect prefers-reduced-motion for all transitions."
+  },
+  "image_urls": [
+    {
+      "category": "Hero Background",
+      "url": "https://images.unsplash.com/photo-1768729797971-472ce92e7a71?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjd8MHwxfHNlYXJjaHw0fHxjcmVhdGl2ZSUyMGRlc2lnbiUyMHN0dWRpbyUyMHdvcmtzcGFjZXxlbnwwfHx8fDE3OTI3MjYxNTB8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Close-up of drawing tablet and glasses, representing a design studio workspace."
+    },
+    {
+      "category": "About Section / Workspace",
+      "url": "https://images.unsplash.com/photo-1738676524296-364cf18900a8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjd8MHwxfHNlYXJjaHwyfHxjcmVhdGl2ZSUyMGRlc2lnbiUyMHN0dWRpbyUyMHdvcmtzcGFjZXxlbnwwfHx8fDE3OTI3MjYxNTB8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Desk with computer monitor, portraying a modern creative environment."
+    },
+    {
+      "category": "Service / Portfolio - Branding",
+      "url": "https://images.pexels.com/photos/7598009/pexels-photo-7598009.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Flat lay showing branding materials and design concepts."
+    },
+    {
+      "category": "Service / Portfolio - Supermarket Advertising",
+      "url": "https://images.unsplash.com/photo-1583258292688-d0213dc5a3a8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2NDF8MHwxfHNlYXJjaHwzfHxzdXBlcm1hcmtldCUyMGZyZXNoJTIwcHJvZHVjZXxlbnwwfHx8fDE3OTI3MjYxNTB8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Shelves of fresh produce, visually supporting supermarket marketing materials."
+    },
+    {
+      "category": "Service / Portfolio - Social Media",
+      "url": "https://images.unsplash.com/photo-1759215524472-1b0686fdbd87?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1MDZ8MHwxfHNlYXJjaHwzfHxzb2NpYWwlMjBtZWRpYSUyMG1hcmtldGluZ3xlbnwwfHx8fDE3OTI3MjYxNTB8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Hands holding a smartphone with social media feed."
+    }
+  ],
+  "accessibility": {
+    "contrast": "Ensure pure white text on the purple primary color meets WCAG AA standards. Use text-shadow where text overlays images.",
+    "testing": "All interactive and key informational elements MUST include a data-testid attribute (e.g., data-testid='hero-cta-orcamento').",
+    "forms": "Inputs must have clear border contrasts, placeholder texts in Nunito font, and proper focus rings (focus:ring-2 focus:ring-purple-500)."
+  },
+  "content_guardrails": {
+    "testimonials": "NO FAKE TESTIMONIALS. Create a section for 'Depoimentos' but render an honest empty state (e.g., 'Em breve, feedbacks de nossos parceiros' or similar neutral state) until real ones are added via Admin.",
+    "portfolio": "All demo project placeholders MUST bear a 'demonstrativo' label visually indicating they are concepts, not real clients."
+  },
+  "component_strategy": {
+    "hero": "Dark section, image background with heavy bg-black/70 overlay. H1 with slogan. Two buttons: 'Conhecer projetos' (outline/white) and 'Solicitar orçamento' (solid purple).",
+    "whatsapp_fab": "Floating Action Button fixed bottom-right with WhatsApp icon. Accessible, using Nunito if text is included.",
+    "admin_dashboard": "Clean, flat cards, utilitarian interface using Shadcn UI. Features: Login, CRUD for projects, services, testimonials, and view received leads."
+  },
+  "instructions_to_main_agent": "Use provided standard HTML/Tailwind for marketing sections to allow creative layouts (Bento grids, asymmetry). Use Shadcn UI for the Admin Dashboard and complex interactive components (forms, dialogs). Maintain strict adherence to the typography map (Montserrat for H1/H2, Roboto for H3/H4, Helvetica for Body, Nunito for Buttons/Forms). Implement the specific mixed light/dark visual theme requested. Do not add transparent headers over content without proper backdrop-blur. Ensure all demo portfolio items have the 'demonstrativo' badge.",
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. Make creative, distinctive frontends that surprise and delight.",
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients.",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy.",
+    "Use glass-morphism effects with backdrop filters (12-24px blur) where necessary (e.g., sticky headers), NEVER use purely transparent backgrounds behind text.",
+    "You MUST NOT apply universal transition (transition: all). Always add transitions for specific properties.",
+    "You MUST NOT center align the app container, i.e. do not add .App { text-align: center; }.",
+    "Always use modern button styles, pill-shaped or sharp with interaction animations.",
+    "NEVER use AI assistant Emoji characters (🤖🧠💭) for icons. Use Phosphor Icons or Lucide.",
+    "Every interaction needs micro-animations (hover states, focus rings).",
+    "Use generous spacing (2-3x more than usual) to avoid cramped, cheap-looking designs.",
+    "Use sonner for toast notifications in the admin/forms."
+  ]
+}
