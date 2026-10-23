@@ -13,7 +13,8 @@ Site institucional profissional e responsivo para a Borcioni Design (Sapiranga/R
 - Logos oficiais em /app/frontend/public/assets/ (logo-h-branca, logo-v-roxa/preta/branca, logo-redes).
 
 ## Implementado (2026-10-23)
-- Refinamento visual (v3): cards e molduras padronizados (fundo branco, borda fina, mesmo padding, sem sombras fortes); removidos efeitos de hover que deslocam elementos (translate/scale/zoom em imagens) e animações escalonadas das grades; card de supermercados deixou de ser um bloco roxo gigante e virou card padrão com selo roxo; botão WhatsApp sem escala no hover.
+- Refinamento visual (v3): cards e molduras padronizados (fundo branco, borda fina, mesmo padding, sem sombras fortes); removidos efeitos de hover que deslocam elementos (translate/scale/zoom em imagens) e animações escalonadas das grades; botão WhatsApp sem escala no hover.
+- Atualização (v4): card de supermercados da home em preto com acentos roxos; demais cards com contraste preto/branco (caixas de ícone pretas, bordas mais marcadas); hero sem selo de cidade; novo card "Quem somos" na home; página Sobre reescrita com a história real completa (fundada em 2024 por Anthony Borcioni, Oktober Beer 2025 com ~1.500 pessoas, segmentos atendidos), contadores animados (+10 clientes, +5 setores, +500 mil alcançados) e fechamento "Nunca foi apenas sobre preço. Sempre foi sobre valor."
 - Notificação por e-mail: cada novo lead dispara e-mail automático (Resend gerenciado Emergent) para borcionidesign@gmail.com, com todos os dados do formulário; falha de e-mail nunca quebra o envio do lead.
 - Redes sociais ativas no rodapé: Instagram e Facebook (@borcionidesign), configuráveis no painel.
 - 7 páginas públicas + /admin (login) + /admin/painel (dashboard).

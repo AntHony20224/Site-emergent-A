@@ -102,19 +102,19 @@ export default function Home() {
 
           <div className="grid gap-6 md:grid-cols-3">
             {highlight && (
-              <article className="md:col-span-2 bg-white rounded-lg p-8 sm:p-10 border border-black/10" data-testid="home-service-highlight">
+              <article className="md:col-span-2 bg-[#0A0A0A] rounded-lg p-8 sm:p-10 border border-black" data-testid="home-service-highlight">
                 <div>
-                  <div className="w-12 h-12 rounded-lg bg-[#9333EA]/10 flex items-center justify-center text-[#9333EA] mb-6">
+                  <div className="w-12 h-12 rounded-lg bg-[#9333EA] flex items-center justify-center text-white mb-6">
                     <ServiceIcon name={highlight.icon} size={24} />
                   </div>
-                  <p className="font-ui text-xs font-extrabold tracking-[0.2em] uppercase text-[#9333EA] mb-2">Especialidade da casa</p>
-                  <h3 className="font-sub text-xl font-semibold text-[#171717] mb-3">{highlight.title}</h3>
-                  <p className="text-sm text-[#525252] leading-relaxed max-w-lg">{highlight.description}</p>
+                  <p className="font-ui text-xs font-extrabold tracking-[0.2em] uppercase text-[#A855F7] mb-2">Especialidade da casa</p>
+                  <h3 className="font-sub text-xl font-semibold text-white mb-3">{highlight.title}</h3>
+                  <p className="text-sm text-white/70 leading-relaxed max-w-lg">{highlight.description}</p>
                 </div>
                 {highlight.items?.length > 0 && (
                   <ul className="flex flex-wrap gap-2 mt-8">
                     {highlight.items.map((item) => (
-                      <li key={item} className="font-ui text-xs font-bold text-[#9333EA] bg-[#9333EA]/10 rounded-full px-3 py-1.5">
+                      <li key={item} className="font-ui text-xs font-bold text-white bg-white/10 rounded-full px-3 py-1.5">
                         {item}
                       </li>
                     ))}
@@ -123,8 +123,8 @@ export default function Home() {
               </article>
             )}
             {topServices.map((s) => (
-              <article key={s.id} className="bg-white border border-black/10 rounded-lg p-8" data-testid={`home-service-card-${s.id}`}>
-                <div className="w-12 h-12 rounded-lg bg-[#9333EA]/10 flex items-center justify-center text-[#9333EA] mb-6">
+              <article key={s.id} className="bg-white border border-black/20 rounded-lg p-8" data-testid={`home-service-card-${s.id}`}>
+                <div className="w-12 h-12 rounded-lg bg-[#0A0A0A] flex items-center justify-center text-white mb-6">
                   <ServiceIcon name={s.icon} size={24} />
                 </div>
                 <h3 className="font-sub text-lg font-semibold text-[#171717] mb-2">{s.title}</h3>
