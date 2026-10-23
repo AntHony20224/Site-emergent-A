@@ -46,7 +46,7 @@ export default function Contact() {
     <main className="bg-[#FAFAFA]">
       <Seo title="Contato e Orçamento" description="Solicite um orçamento sem compromisso: identidade visual, redes sociais, impressos e publicidade para supermercados." />
 
-      <section className="bg-[#0A0A0A] pt-32 pb-20 sm:pt-40 sm:pb-24 grain-overlay" data-testid="contact-header">
+      <section className="bg-[#0A0A0A] pt-32 pb-20 sm:pt-40 sm:pb-24" data-testid="contact-header">
         <div className="max-w-7xl mx-auto px-5 sm:px-8">
           <p className="font-ui text-xs font-extrabold tracking-[0.2em] uppercase text-[#A855F7] mb-4">Contato</p>
           <h1 className="font-display text-4xl sm:text-5xl font-black tracking-tighter text-white max-w-2xl leading-[1.05]">

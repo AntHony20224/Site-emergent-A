@@ -19,14 +19,14 @@ export default function Portfolio() {
     <main className="bg-[#FAFAFA]">
       <Seo title="Portfólio" description="Projetos de identidade visual, campanhas, encartes e materiais gráficos criados pela Borcioni Design." />
 
-      <section className="bg-[#0A0A0A] pt-32 pb-20 sm:pt-40 sm:pb-24 grain-overlay" data-testid="portfolio-header">
+      <section className="bg-[#0A0A0A] pt-32 pb-20 sm:pt-40 sm:pb-24" data-testid="portfolio-header">
         <div className="max-w-7xl mx-auto px-5 sm:px-8">
           <p className="font-ui text-xs font-extrabold tracking-[0.2em] uppercase text-[#A855F7] mb-4">Portfólio</p>
           <h1 className="font-display text-4xl sm:text-5xl font-black tracking-tighter text-white max-w-2xl leading-[1.05]">
             Trabalhos que falam por nós
           </h1>
           <p className="text-white/65 leading-relaxed max-w-xl mt-6">
-            Enquanto nossos projetos reais não são publicados, apresentamos conceitos demonstrativos que mostram o padrão de qualidade do estúdio.
+            Conceitos demonstrativos mostram o padrão do estúdio enquanto os projetos reais não são publicados.
           </p>
         </div>
       </section>

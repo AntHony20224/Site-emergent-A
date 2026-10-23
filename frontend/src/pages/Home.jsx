@@ -7,7 +7,7 @@ import { ServiceIcon } from "@/components/ServiceIcon";
 import { Testimonials } from "@/components/Testimonials";
 import { useSite } from "@/context/SiteContext";
 
-const HERO_IMG = "https://images.unsplash.com/photo-1768729797971-472ce92e7a71?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjd8MHwxfHNlYXJjaHw0fHxjcmVhdGl2ZSUyMGRlc2lnbiUyMHN0dWRpbyUyMHdvcmtzcGFjZXxlbnwwfHx8fDE3OTI3MjYxNTB8MA&ixlib=rb-4.1.0&q=85";
+const HERO_IMG = "https://images.unsplash.com/photo-1768729797971-472ce92e7a71?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzMjd8MHwxfHNlYXJjaHw0fHxjcmVhdGl2ZSUyMGRlc2lnbiUyMHN0dWRpbyUyMHdvcmtzcGFjZXxlbnwwfHx8fDE3OTI3MjYxNTB8MA&ixlib=rb-4.1.0&q=80&w=1600&auto=format";
 
 export default function Home() {
   const { services } = useSite();
@@ -27,19 +27,19 @@ export default function Home() {
       <Seo description="Borcioni Design e Comunicação: identidade visual, redes sociais, impressos e publicidade para supermercados em Sapiranga (RS) e região. Mais valor, menos preço." />
 
       {/* HERO */}
-      <section className="relative min-h-[92vh] flex items-center bg-[#0A0A0A] grain-overlay" data-testid="hero-section">
+      <section className="relative min-h-[92vh] flex items-center bg-[#0A0A0A]" data-testid="hero-section">
         <img src={HERO_IMG} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/70" />
         <div className="relative max-w-7xl mx-auto px-5 sm:px-8 py-32 w-full">
           <p className="font-ui text-xs font-extrabold tracking-[0.25em] uppercase text-[#A855F7] mb-6 fade-up" data-testid="hero-eyebrow">
-            Design e Comunicação — Sapiranga · RS
+            Sapiranga · RS
           </p>
           <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter text-white max-w-3xl leading-[1.05] fade-up" style={{ animationDelay: "0.1s" }} data-testid="hero-slogan">
             Marcas que comunicam.<br />
             <span className="text-[#A855F7]">Ideias que permanecem.</span>
           </h1>
-          <p className="text-white/75 text-base sm:text-lg leading-relaxed max-w-xl mt-7 fade-up" style={{ animationDelay: "0.2s" }} data-testid="hero-description">
-            A Borcioni Design e Comunicação cria identidades visuais, campanhas e materiais que fazem a sua empresa ser lembrada — com qualidade de grande estúdio e preço de quem está construindo junto com você.
+          <p className="text-white/75 text-base sm:text-lg leading-relaxed max-w-lg mt-7 fade-up" style={{ animationDelay: "0.2s" }} data-testid="hero-description">
+            Design e comunicação que fazem sua empresa ser lembrada.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mt-10 fade-up" style={{ animationDelay: "0.3s" }}>
             <Link
@@ -77,7 +77,7 @@ export default function Home() {
             <div>
               <p className="font-ui text-xs font-extrabold tracking-[0.2em] uppercase text-[#9333EA] mb-3">Serviços</p>
               <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#171717]">
-                Tudo que sua marca precisa para ser vista
+                Tudo para sua marca ser vista
               </h2>
             </div>
             <Link to="/servicos" className="font-ui text-sm font-extrabold text-[#9333EA] hover:text-[#7E22CE] flex items-center gap-1 transition-colors" data-testid="home-services-link">
@@ -120,7 +120,7 @@ export default function Home() {
       </section>
 
       {/* PORTFÓLIO PREVIEW */}
-      <section className="bg-[#0A0A0A] py-24 sm:py-32 grain-overlay" data-testid="home-portfolio-section">
+      <section className="bg-[#0A0A0A] py-24 sm:py-32" data-testid="home-portfolio-section">
         <div className="max-w-7xl mx-auto px-5 sm:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
             <div>
@@ -169,7 +169,7 @@ export default function Home() {
             Sua marca pronta para ser lembrada?
           </h2>
           <p className="text-white/65 leading-relaxed max-w-xl mx-auto mb-10">
-            Conte sua ideia e receba uma proposta sem compromisso. Respondemos rápido — e em linguagem simples.
+            Conte sua ideia e receba uma proposta sem compromisso.
           </p>
           <Link
             to="/contato"

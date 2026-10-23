@@ -34,7 +34,7 @@ export default function ProjectDetail() {
     <main className="bg-white">
       <Seo title={project.title} description={project.description} />
 
-      <section className="relative pt-40 pb-24 bg-[#0A0A0A] overflow-hidden grain-overlay" data-testid="project-hero">
+      <section className="relative pt-40 pb-24 bg-[#0A0A0A] overflow-hidden" data-testid="project-hero">
         <img src={project.cover_image} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover opacity-40" />
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative max-w-4xl mx-auto px-5 sm:px-8">

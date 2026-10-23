@@ -28,7 +28,7 @@ export default function AdminLogin() {
   const inputCls = "w-full font-ui text-sm rounded-lg border border-white/15 bg-white/5 px-4 py-3 text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-[#9333EA] focus:border-transparent transition-shadow";
 
   return (
-    <main className="min-h-screen bg-[#0A0A0A] flex items-center justify-center px-5 grain-overlay" data-testid="admin-login-page">
+    <main className="min-h-screen bg-[#0A0A0A] flex items-center justify-center px-5" data-testid="admin-login-page">
       <Seo title="Área Administrativa" />
       <div className="w-full max-w-sm">
         <div className="text-center mb-10">

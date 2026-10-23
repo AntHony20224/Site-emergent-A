@@ -13,14 +13,14 @@ export default function Services() {
     <main className="bg-white">
       <Seo title="Serviços" description="Marketing para redes sociais, identidade visual, materiais gráficos, anúncios impulsionados e publicidade completa para supermercados." />
 
-      <section className="bg-[#0A0A0A] pt-32 pb-20 sm:pt-40 sm:pb-24 grain-overlay" data-testid="services-header">
+      <section className="bg-[#0A0A0A] pt-32 pb-20 sm:pt-40 sm:pb-24" data-testid="services-header">
         <div className="max-w-7xl mx-auto px-5 sm:px-8">
           <p className="font-ui text-xs font-extrabold tracking-[0.2em] uppercase text-[#A855F7] mb-4">Serviços</p>
           <h1 className="font-display text-4xl sm:text-5xl font-black tracking-tighter text-white max-w-2xl leading-[1.05]">
-            Comunicação completa, do conceito à vitrine
+            Comunicação completa
           </h1>
           <p className="text-white/65 leading-relaxed max-w-xl mt-6">
-            Do primeiro logotipo ao anúncio impulsionado, cada serviço é pensado para fazer sua marca crescer com consistência.
+            Do logotipo ao anúncio impulsionado, tudo com um só objetivo: fazer sua marca crescer.
           </p>
         </div>
       </section>

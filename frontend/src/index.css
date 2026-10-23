@@ -4,13 +4,11 @@
 
 /*
   TIPOGRAFIA BORCIONI DESIGN
-  - Títulos (H1/H2): Gotham — FONTE LICENCIADA. Enquanto os arquivos licenciados
-    não forem fornecidos, usamos Montserrat como fallback.
-    PARA ATIVAR GOTHAM: adicione os arquivos em /public/fonts/ e descomente o
-    @font-face abaixo, depois troque 'Montserrat' por 'Gotham' em font-display.
-  - Subtítulos (H3/H4): Roboto
-  - Textos: Helvetica (Arial como fallback do sistema)
-  - Botões, formulários e destaques: Nunito
+  - Títulos: Gotham — FONTE LICENCIADA. Enquanto os arquivos licenciados não
+    forem fornecidos, usamos Montserrat como alternativa visualmente semelhante.
+    PARA ATIVAR GOTHAM: adicione os arquivos em /public/fonts/, descomente o
+    @font-face abaixo e troque 'Montserrat' por 'Gotham' nas classes utilitárias.
+  - Textos e interface: Nunito
 */
 /* @font-face {
   font-family: 'Gotham';
@@ -53,7 +51,7 @@
     }
     body {
         @apply bg-background text-foreground antialiased;
-        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-family: 'Nunito', sans-serif;
     }
     ::selection {
         background-color: #9333ea;
@@ -66,21 +64,10 @@
         font-family: 'Montserrat', sans-serif; /* fallback de Gotham */
     }
     .font-sub {
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Montserrat', sans-serif; /* fallback de Gotham — subtítulos */
     }
     .font-ui {
         font-family: 'Nunito', sans-serif;
-    }
-    .grain-overlay {
-        position: relative;
-    }
-    .grain-overlay::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        opacity: 0.05;
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 }
 

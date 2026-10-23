@@ -13,6 +13,7 @@ Site institucional profissional e responsivo para a Borcioni Design (Sapiranga/R
 - Logos oficiais em /app/frontend/public/assets/ (logo-h-branca, logo-v-roxa/preta/branca, logo-redes).
 
 ## Implementado (2026-10-23)
+- Refinamento visual (v2): tipografia reduzida a 2 famílias — Montserrat (fallback Gotham) nos títulos e Nunito em textos/UI (Roboto e Helvetica removidas do carregamento); hero simplificado (selo curto, slogan, subtítulo de uma linha); títulos e parágrafos encurtados em todas as páginas; textura de grão removida das seções escuras; descrições de serviços resumidas no banco; imagens otimizadas (w/q/auto=format).
 - Notificação por e-mail: cada novo lead dispara e-mail automático (Resend gerenciado Emergent) para borcionidesign@gmail.com, com todos os dados do formulário; falha de e-mail nunca quebra o envio do lead.
 - Redes sociais ativas no rodapé: Instagram e Facebook (@borcionidesign), configuráveis no painel.
 - 7 páginas públicas + /admin (login) + /admin/painel (dashboard).

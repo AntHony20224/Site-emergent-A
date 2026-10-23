@@ -28,9 +28,9 @@ export function Testimonials({ items }) {
             className="border border-dashed border-black/15 rounded-lg p-12 text-center bg-white"
             data-testid="testimonials-empty-state"
           >
-            <p className="font-sub text-lg font-medium text-[#171717] mb-2">Em breve, feedbacks de nossos parceiros.</p>
+            <p className="font-sub text-lg font-semibold text-[#171717] mb-2">Em breve, feedbacks de nossos parceiros.</p>
             <p className="text-sm text-[#525252] max-w-md mx-auto">
-              Publicamos aqui apenas depoimentos reais e autorizados pelos nossos clientes. Assim que os primeiros chegarem, você os verá neste espaço.
+              Publicamos aqui apenas depoimentos reais e autorizados.
             </p>
           </div>
         )}
