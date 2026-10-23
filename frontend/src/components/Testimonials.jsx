@@ -13,7 +13,7 @@ export function Testimonials({ items }) {
               <figure
                 key={t.id}
                 data-testid={`testimonial-card-${t.id}`}
-                className="bg-white border border-black/10 rounded-lg p-8 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-transform duration-300"
+                className="bg-white border border-black/10 rounded-lg p-8"
               >
                 <blockquote className="text-[#171717] leading-relaxed mb-6">“{t.text}”</blockquote>
                 <figcaption>

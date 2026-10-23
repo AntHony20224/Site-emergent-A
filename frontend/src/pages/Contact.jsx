@@ -100,7 +100,7 @@ export default function Contact() {
           {/* Formulário */}
           <div className="lg:col-span-2">
             {sent ? (
-              <div className="bg-white border border-[#9333EA]/30 rounded-lg p-12 text-center shadow-[0_8px_32px_rgba(0,0,0,0.06)]" data-testid="contact-success-message">
+              <div className="bg-white border border-[#9333EA]/30 rounded-lg p-12 text-center" data-testid="contact-success-message">
                 <div className="w-14 h-14 rounded-full bg-[#9333EA]/10 text-[#9333EA] flex items-center justify-center mx-auto mb-6">
                   <Send size={24} />
                 </div>
@@ -113,7 +113,7 @@ export default function Contact() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={submit} className="bg-white border border-black/10 rounded-lg p-8 sm:p-10 shadow-[0_8px_32px_rgba(0,0,0,0.06)]" data-testid="contact-form">
+              <form onSubmit={submit} className="bg-white border border-black/10 rounded-lg p-8 sm:p-10" data-testid="contact-form">
                 <h2 className="font-sub text-xl font-semibold text-[#171717] mb-8">Solicite um orçamento</h2>
                 <div className="grid gap-6 sm:grid-cols-2">
                   <div>

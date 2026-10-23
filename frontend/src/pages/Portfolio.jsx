@@ -60,16 +60,15 @@ export default function Portfolio() {
             </div>
           ) : (
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {visible.map((p, i) => (
+              {visible.map((p) => (
                 <Link
                   key={p.id}
                   to={`/portfolio/${p.id}`}
                   data-testid={`portfolio-card-${p.id}`}
-                  className="group bg-white rounded-lg overflow-hidden border border-black/10 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-transform duration-300 fade-up"
-                  style={{ animationDelay: `${i * 0.08}s` }}
+                  className="bg-white rounded-lg overflow-hidden border border-black/10 block"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden">
-                    <img src={p.cover_image} alt={p.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+                    <img src={p.cover_image} alt={p.title} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
                     {p.is_demo && (
                       <span className="absolute top-4 left-4 font-ui text-[10px] font-extrabold uppercase tracking-widest bg-white/90 text-black rounded-full px-3 py-1">
                         Demonstrativo

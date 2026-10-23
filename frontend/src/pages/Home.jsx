@@ -71,7 +71,7 @@ export default function Home() {
       </section>
 
       {/* SERVIÇOS PREVIEW */}
-      <section className="bg-white py-24 sm:py-32" data-testid="home-services-section">
+      <section className="bg-[#FAFAFA] py-24 sm:py-32" data-testid="home-services-section">
         <div className="max-w-7xl mx-auto px-5 sm:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
             <div>
@@ -87,18 +87,19 @@ export default function Home() {
 
           <div className="grid gap-6 md:grid-cols-3">
             {highlight && (
-              <article className="md:col-span-2 bg-[#0A0A0A] rounded-lg p-8 sm:p-10 flex flex-col justify-between min-h-[280px] border border-white/10 hover:-translate-y-1 transition-transform duration-300" data-testid="home-service-highlight">
+              <article className="md:col-span-2 bg-white rounded-lg p-8 sm:p-10 border border-black/10" data-testid="home-service-highlight">
                 <div>
-                  <div className="w-12 h-12 rounded-lg bg-[#9333EA] flex items-center justify-center text-white mb-6">
+                  <div className="w-12 h-12 rounded-lg bg-[#9333EA]/10 flex items-center justify-center text-[#9333EA] mb-6">
                     <ServiceIcon name={highlight.icon} size={24} />
                   </div>
-                  <h3 className="font-sub text-xl sm:text-2xl font-semibold text-white mb-3">{highlight.title}</h3>
-                  <p className="text-white/65 leading-relaxed max-w-lg">{highlight.description}</p>
+                  <p className="font-ui text-xs font-extrabold tracking-[0.2em] uppercase text-[#9333EA] mb-2">Especialidade da casa</p>
+                  <h3 className="font-sub text-xl font-semibold text-[#171717] mb-3">{highlight.title}</h3>
+                  <p className="text-sm text-[#525252] leading-relaxed max-w-lg">{highlight.description}</p>
                 </div>
                 {highlight.items?.length > 0 && (
                   <ul className="flex flex-wrap gap-2 mt-8">
                     {highlight.items.map((item) => (
-                      <li key={item} className="font-ui text-xs font-bold text-[#A855F7] bg-[#9333EA]/15 border border-[#9333EA]/30 rounded-full px-3 py-1.5">
+                      <li key={item} className="font-ui text-xs font-bold text-[#9333EA] bg-[#9333EA]/10 rounded-full px-3 py-1.5">
                         {item}
                       </li>
                     ))}
@@ -107,7 +108,7 @@ export default function Home() {
               </article>
             )}
             {topServices.map((s) => (
-              <article key={s.id} className="bg-[#FAFAFA] border border-black/10 rounded-lg p-8 hover:-translate-y-1 hover:shadow-[0_8px_32px_rgba(0,0,0,0.06)] transition-all duration-300" data-testid={`home-service-card-${s.id}`}>
+              <article key={s.id} className="bg-white border border-black/10 rounded-lg p-8" data-testid={`home-service-card-${s.id}`}>
                 <div className="w-12 h-12 rounded-lg bg-[#9333EA]/10 flex items-center justify-center text-[#9333EA] mb-6">
                   <ServiceIcon name={s.icon} size={24} />
                 </div>
@@ -140,11 +141,10 @@ export default function Home() {
                 key={p.id}
                 to={`/portfolio/${p.id}`}
                 data-testid={`home-project-card-${p.id}`}
-                className="group relative rounded-lg overflow-hidden border border-white/10 aspect-[4/3] block fade-up"
-                style={{ animationDelay: `${i * 0.12}s` }}
+                className="relative rounded-lg overflow-hidden border border-white/10 aspect-[4/3] block"
               >
-                <img src={p.cover_image} alt={p.title} className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
-                <div className="absolute inset-0 bg-black/55 group-hover:bg-black/40 transition-colors duration-300" />
+                <img src={p.cover_image} alt={p.title} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0 bg-black/55" />
                 <div className="absolute inset-x-0 bottom-0 p-6">
                   <p className="font-ui text-xs font-bold text-[#A855F7] uppercase tracking-wider mb-1">{p.category}</p>
                   <h3 className="font-sub text-lg font-semibold text-white">{p.title}</h3>

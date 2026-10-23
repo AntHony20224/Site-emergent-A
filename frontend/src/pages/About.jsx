@@ -49,7 +49,7 @@ export default function About() {
           <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-[#171717] mb-14">O que guia nosso trabalho</h2>
           <div className="grid gap-6 md:grid-cols-3">
             {VALUES.map(({ Icon, title, text }) => (
-              <article key={title} className="bg-white border border-black/10 rounded-lg p-8 shadow-[0_8px_32px_rgba(0,0,0,0.06)] hover:-translate-y-1 transition-transform duration-300">
+              <article key={title} className="bg-white border border-black/10 rounded-lg p-8">
                 <div className="w-12 h-12 rounded-lg bg-[#9333EA]/10 flex items-center justify-center text-[#9333EA] mb-6">
                   <Icon size={24} aria-hidden="true" />
                 </div>
