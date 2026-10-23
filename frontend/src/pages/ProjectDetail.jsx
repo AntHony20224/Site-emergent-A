@@ -34,7 +34,7 @@ export default function ProjectDetail() {
     <main className="bg-white">
       <Seo title={project.title} description={project.description} />
 
-      <section className="relative pt-40 pb-24 bg-[#0A0A0A] overflow-hidden" data-testid="project-hero">
+      <section className="relative pt-32 pb-16 bg-[#0A0A0A] overflow-hidden" data-testid="project-hero">
         <img src={project.cover_image} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover opacity-40" />
         <div className="absolute inset-0 bg-black/60" />
         <div className="relative max-w-4xl mx-auto px-5 sm:px-8">
@@ -53,7 +53,7 @@ export default function ProjectDetail() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-24" data-testid="project-content">
+      <section className="py-12 sm:py-16" data-testid="project-content">
         <div className="max-w-4xl mx-auto px-5 sm:px-8">
           <p className="text-lg text-[#171717] leading-relaxed mb-14" data-testid="project-description">{project.description}</p>
 

@@ -27,13 +27,12 @@ export default function Home() {
       <Seo description="Borcioni Design e Comunicação: identidade visual, redes sociais, impressos e publicidade para supermercados em Sapiranga (RS) e região. Mais valor, menos preço." />
 
       {/* HERO */}
-      <section className="relative min-h-[92vh] flex items-center bg-[#0A0A0A]" data-testid="hero-section">
+      <section className="relative min-h-[85vh] flex items-center bg-[#0A0A0A]" data-testid="hero-section">
         <img src={HERO_IMG} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/70" />
-        <div className="relative max-w-7xl mx-auto px-5 sm:px-8 py-32 w-full">
+        <div className="relative max-w-7xl mx-auto px-5 sm:px-8 py-24 w-full">
           <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-black tracking-tighter text-white max-w-3xl leading-[1.05] fade-up" data-testid="hero-slogan">
-            Marcas que comunicam.<br />
-            <span className="text-[#A855F7]">Ideias que permanecem.</span>
+            Valor em <span className="text-[#A855F7]">cada ação.</span>
           </h1>
           <p className="text-white/75 text-base sm:text-lg leading-relaxed max-w-lg mt-7 fade-up" style={{ animationDelay: "0.2s" }} data-testid="hero-description">
             Design e comunicação que fazem sua empresa ser lembrada.
@@ -58,7 +57,7 @@ export default function Home() {
       </section>
 
       {/* POSICIONAMENTO */}
-      <section className="bg-[#9333EA] py-10" data-testid="positioning-strip">
+      <section className="bg-[#9333EA] py-8" data-testid="positioning-strip">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
           <BadgeCheck size={32} className="text-white shrink-0" aria-hidden="true" />
           <p className="font-display text-xl sm:text-2xl font-bold text-white tracking-tight">
@@ -68,27 +67,22 @@ export default function Home() {
       </section>
 
       {/* QUEM SOMOS */}
-      <section className="bg-white py-16 sm:py-20" data-testid="home-about-card">
-        <div className="max-w-7xl mx-auto px-5 sm:px-8">
-          <div className="border border-black/10 rounded-lg p-8 sm:p-10 flex flex-col md:flex-row md:items-center gap-6 md:gap-12">
-            <img src="/assets/logo-v-roxa.png" alt="Símbolo da Borcioni Design" className="h-16 w-auto shrink-0" />
-            <div className="flex-1">
-              <h2 className="font-display text-xl sm:text-2xl font-bold tracking-tight text-[#171717] mb-2">Quem somos</h2>
-              <p className="text-sm sm:text-base text-[#525252] leading-relaxed max-w-2xl">
-                Estúdio de design e comunicação de Sapiranga (RS), atendendo toda a região. Criamos identidades visuais, campanhas e publicidade para pequenas e médias empresas.
-              </p>
-            </div>
-            <Link to="/sobre" className="font-ui text-sm font-extrabold text-[#9333EA] hover:text-[#7E22CE] flex items-center gap-1 shrink-0 transition-colors" data-testid="home-about-link">
-              Conhecer o estúdio <ArrowRight size={16} />
-            </Link>
-          </div>
+      <section className="bg-white py-10" data-testid="home-about-card">
+        <div className="max-w-7xl mx-auto px-5 sm:px-8 text-center">
+          <Link
+            to="/sobre"
+            data-testid="home-about-link"
+            className="inline-flex items-center gap-2 font-ui font-extrabold text-sm border border-black/20 text-[#171717] rounded-full px-8 py-3.5 hover:bg-[#0A0A0A] hover:text-white hover:border-black transition-colors duration-200"
+          >
+            Quem somos <ArrowRight size={16} />
+          </Link>
         </div>
       </section>
 
       {/* SERVIÇOS PREVIEW */}
-      <section className="bg-[#FAFAFA] py-24 sm:py-32" data-testid="home-services-section">
+      <section className="bg-[#FAFAFA] py-14 sm:py-20" data-testid="home-services-section">
         <div className="max-w-7xl mx-auto px-5 sm:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
             <div>
               <p className="font-ui text-xs font-extrabold tracking-[0.2em] uppercase text-[#9333EA] mb-3">Serviços</p>
               <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#171717]">
@@ -136,9 +130,9 @@ export default function Home() {
       </section>
 
       {/* PORTFÓLIO PREVIEW */}
-      <section className="bg-[#0A0A0A] py-24 sm:py-32" data-testid="home-portfolio-section">
+      <section className="bg-[#0A0A0A] py-14 sm:py-20" data-testid="home-portfolio-section">
         <div className="max-w-7xl mx-auto px-5 sm:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-14">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
             <div>
               <p className="font-ui text-xs font-extrabold tracking-[0.2em] uppercase text-[#A855F7] mb-3">Portfólio</p>
               <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white">
@@ -178,7 +172,7 @@ export default function Home() {
       <Testimonials items={testimonials} />
 
       {/* CTA FINAL */}
-      <section className="bg-[#0A0A0A] py-24 sm:py-32 border-t border-white/10" data-testid="home-cta-section">
+      <section className="bg-[#0A0A0A] py-16 sm:py-20 border-t border-white/10" data-testid="home-cta-section">
         <div className="max-w-4xl mx-auto px-5 sm:px-8 text-center">
           <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white mb-6">
             Sua marca pronta para ser lembrada?

@@ -4,18 +4,9 @@
 
 /*
   TIPOGRAFIA BORCIONI DESIGN
-  - Títulos: Gotham — FONTE LICENCIADA. Enquanto os arquivos licenciados não
-    forem fornecidos, usamos Montserrat como alternativa visualmente semelhante.
-    PARA ATIVAR GOTHAM: adicione os arquivos em /public/fonts/, descomente o
-    @font-face abaixo e troque 'Montserrat' por 'Gotham' nas classes utilitárias.
+  - Títulos: Rubik
   - Textos e interface: Nunito
 */
-/* @font-face {
-  font-family: 'Gotham';
-  src: url('/fonts/Gotham-Bold.woff2') format('woff2');
-  font-weight: 700;
-  font-display: swap;
-} */
 
 @layer base {
     :root {
@@ -61,10 +52,10 @@
 
 @layer utilities {
     .font-display {
-        font-family: 'Montserrat', sans-serif; /* fallback de Gotham */
+        font-family: 'Rubik', sans-serif;
     }
     .font-sub {
-        font-family: 'Montserrat', sans-serif; /* fallback de Gotham — subtítulos */
+        font-family: 'Rubik', sans-serif;
     }
     .font-ui {
         font-family: 'Nunito', sans-serif;

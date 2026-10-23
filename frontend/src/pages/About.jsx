@@ -61,13 +61,13 @@ export default function About() {
         </div>
       </section>
 
-      <section className="bg-white py-16 sm:py-20 border-b border-black/10" data-testid="about-stats">
+      <section className="bg-white py-12 sm:py-14 border-b border-black/10" data-testid="about-stats">
         <div className="max-w-5xl mx-auto px-5 sm:px-8 grid grid-cols-1 sm:grid-cols-3 gap-10">
           {STATS.map((s) => <Stat key={s.testid} {...s} />)}
         </div>
       </section>
 
-      <section className="py-24 sm:py-32" data-testid="about-story">
+      <section className="py-14 sm:py-20" data-testid="about-story">
         <div className="max-w-3xl mx-auto px-5 sm:px-8">
           <div className="space-y-6 text-[#525252] leading-relaxed">
             <p>
@@ -89,7 +89,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="bg-[#0A0A0A] py-24 sm:py-32" data-testid="about-cta">
+      <section className="bg-[#0A0A0A] py-14 sm:py-20" data-testid="about-cta">
         <div className="max-w-4xl mx-auto px-5 sm:px-8 text-center">
           <h2 className="font-display text-2xl sm:text-3xl font-bold tracking-tight text-white mb-8">
             Vamos construir o próximo capítulo juntos?

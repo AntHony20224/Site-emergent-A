@@ -1,9 +1,9 @@
 export function Testimonials({ items }) {
   return (
-    <section className="bg-[#FAFAFA] py-24 sm:py-32" data-testid="testimonials-section">
+    <section className="bg-[#FAFAFA] py-14 sm:py-20" data-testid="testimonials-section">
       <div className="max-w-7xl mx-auto px-5 sm:px-8">
         <p className="font-ui text-xs font-extrabold tracking-[0.2em] uppercase text-[#9333EA] mb-3">Depoimentos</p>
-        <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#171717] mb-12">
+        <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#171717] mb-8">
           Quem confia, recomenda
         </h2>
 
@@ -13,7 +13,7 @@ export function Testimonials({ items }) {
               <figure
                 key={t.id}
                 data-testid={`testimonial-card-${t.id}`}
-                className="bg-white border border-black/10 rounded-lg p-8"
+                className="bg-white border border-black/20 rounded-lg p-8"
               >
                 <blockquote className="text-[#171717] leading-relaxed mb-6">“{t.text}”</blockquote>
                 <figcaption>

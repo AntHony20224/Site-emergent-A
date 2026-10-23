@@ -4,12 +4,12 @@ export default function Terms() {
   return (
     <main className="bg-white">
       <Seo title="Termos de Uso" description="Termos de uso do site da Borcioni Design e Comunicação." />
-      <section className="bg-[#0A0A0A] pt-32 pb-16 sm:pt-40 sm:pb-20" data-testid="terms-header">
+      <section className="bg-[#0A0A0A] pt-28 pb-12 sm:pt-32 sm:pb-16" data-testid="terms-header">
         <div className="max-w-3xl mx-auto px-5 sm:px-8">
           <h1 className="font-display text-3xl sm:text-4xl font-black tracking-tighter text-white">Termos de Uso</h1>
         </div>
       </section>
-      <section className="py-16 sm:py-24" data-testid="terms-content">
+      <section className="py-12 sm:py-16" data-testid="terms-content">
         <div className="max-w-3xl mx-auto px-5 sm:px-8 space-y-8 text-[#525252] leading-relaxed">
           <p>Ao acessar o site da Borcioni Design e Comunicação, você concorda com os termos abaixo.</p>
 

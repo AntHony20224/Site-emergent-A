@@ -4,12 +4,12 @@ export default function Privacy() {
   return (
     <main className="bg-white">
       <Seo title="Política de Privacidade" description="Como a Borcioni Design e Comunicação coleta, usa e protege seus dados pessoais, em conformidade com a LGPD." />
-      <section className="bg-[#0A0A0A] pt-32 pb-16 sm:pt-40 sm:pb-20" data-testid="privacy-header">
+      <section className="bg-[#0A0A0A] pt-28 pb-12 sm:pt-32 sm:pb-16" data-testid="privacy-header">
         <div className="max-w-3xl mx-auto px-5 sm:px-8">
           <h1 className="font-display text-3xl sm:text-4xl font-black tracking-tighter text-white">Política de Privacidade</h1>
         </div>
       </section>
-      <section className="py-16 sm:py-24" data-testid="privacy-content">
+      <section className="py-12 sm:py-16" data-testid="privacy-content">
         <div className="max-w-3xl mx-auto px-5 sm:px-8 space-y-8 text-[#525252] leading-relaxed">
           <p>A Borcioni Design e Comunicação respeita a sua privacidade e trata dados pessoais em conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei nº 13.709/2018).</p>
 

@@ -20,7 +20,7 @@ export function Footer() {
         <div>
           <img src="/assets/logo-h-branca.png" alt="Borcioni Design" className="h-10 w-auto mb-5" />
           <p className="text-white/60 text-sm leading-relaxed max-w-xs">
-            Marcas que comunicam. Ideias que permanecem. Design e comunicação em Sapiranga (RS) e região.
+            Marcas que comunicam. Ideias que permanecem. Valor em cada ação — Sapiranga (RS) e região.
           </p>
         </div>
 

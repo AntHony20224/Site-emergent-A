@@ -13,7 +13,7 @@ export default function Services() {
     <main className="bg-white">
       <Seo title="Serviços" description="Marketing para redes sociais, identidade visual, materiais gráficos, anúncios impulsionados e publicidade completa para supermercados." />
 
-      <section className="bg-[#0A0A0A] pt-32 pb-20 sm:pt-40 sm:pb-24" data-testid="services-header">
+      <section className="bg-[#0A0A0A] pt-28 pb-14 sm:pt-32 sm:pb-16" data-testid="services-header">
         <div className="max-w-7xl mx-auto px-5 sm:px-8">
           <p className="font-ui text-xs font-extrabold tracking-[0.2em] uppercase text-[#A855F7] mb-4">Serviços</p>
           <h1 className="font-display text-4xl sm:text-5xl font-black tracking-tighter text-white max-w-2xl leading-[1.05]">
@@ -25,11 +25,11 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="py-24 sm:py-32" data-testid="services-grid-section">
+      <section className="py-14 sm:py-20" data-testid="services-grid-section">
         <div className="max-w-7xl mx-auto px-5 sm:px-8">
           <div className="grid gap-6 md:grid-cols-2">
             {highlight && (
-              <article className="md:col-span-2 bg-white rounded-lg p-8 sm:p-10 border border-black/10" data-testid="service-highlight-card">
+              <article className="md:col-span-2 bg-white rounded-lg p-8 sm:p-10 border border-black/20" data-testid="service-highlight-card">
                 <div className="w-12 h-12 rounded-lg bg-[#9333EA]/10 flex items-center justify-center text-[#9333EA] mb-6">
                   <ServiceIcon name={highlight.icon} size={28} />
                 </div>
@@ -53,7 +53,7 @@ export default function Services() {
               <article
                 key={s.id}
                 data-testid={`service-card-${s.id}`}
-                className="bg-white border border-black/10 rounded-lg p-8 sm:p-10"
+                className="bg-white border border-black/20 rounded-lg p-8 sm:p-10"
               >
                 <div className="w-12 h-12 rounded-lg bg-[#9333EA]/10 flex items-center justify-center text-[#9333EA] mb-6">
                   <ServiceIcon name={s.icon} size={24} />

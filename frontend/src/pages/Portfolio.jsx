@@ -19,7 +19,7 @@ export default function Portfolio() {
     <main className="bg-[#FAFAFA]">
       <Seo title="Portfólio" description="Projetos de identidade visual, campanhas, encartes e materiais gráficos criados pela Borcioni Design." />
 
-      <section className="bg-[#0A0A0A] pt-32 pb-20 sm:pt-40 sm:pb-24" data-testid="portfolio-header">
+      <section className="bg-[#0A0A0A] pt-28 pb-14 sm:pt-32 sm:pb-16" data-testid="portfolio-header">
         <div className="max-w-7xl mx-auto px-5 sm:px-8">
           <p className="font-ui text-xs font-extrabold tracking-[0.2em] uppercase text-[#A855F7] mb-4">Portfólio</p>
           <h1 className="font-display text-4xl sm:text-5xl font-black tracking-tighter text-white max-w-2xl leading-[1.05]">
@@ -31,9 +31,9 @@ export default function Portfolio() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-24" data-testid="portfolio-grid-section">
+      <section className="py-12 sm:py-16" data-testid="portfolio-grid-section">
         <div className="max-w-7xl mx-auto px-5 sm:px-8">
-          <div className="flex flex-wrap gap-2 mb-12" role="tablist" aria-label="Filtrar por categoria">
+          <div className="flex flex-wrap gap-2 mb-8" role="tablist" aria-label="Filtrar por categoria">
             {categories.map((c) => (
               <button
                 key={c}
@@ -65,7 +65,7 @@ export default function Portfolio() {
                   key={p.id}
                   to={`/portfolio/${p.id}`}
                   data-testid={`portfolio-card-${p.id}`}
-                  className="bg-white rounded-lg overflow-hidden border border-black/10 block"
+                  className="bg-white rounded-lg overflow-hidden border border-black/20 block"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <img src={p.cover_image} alt={p.title} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
