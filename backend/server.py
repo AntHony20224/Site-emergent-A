@@ -10,6 +10,13 @@ from typing import List, Optional
 
 import bcrypt
 import jwt
+import re
+import ipaddress
+import asyncio
+import httpx
+from html import escape
+from html.parser import HTMLParser
+from urllib.parse import urlparse
 from fastapi import FastAPI, APIRouter, HTTPException, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from starlette.middleware.cors import CORSMiddleware
@@ -24,6 +31,127 @@ db = client[os.environ['DB_NAME']]
 JWT_SECRET = os.environ['JWT_SECRET']
 JWT_ALGORITHM = "HS256"
 TOKEN_TTL_HOURS = 12
+
+# Emergent managed email (proxy constant — never read from env)
+EMAIL_BASE_URL = "https://integrations.emergentagent.com"
+EMAIL_KEY = os.environ["EMERGENT_EMAIL_KEY"]
+EMAIL_FROM_NAME = os.environ["EMAIL_FROM_NAME"]
+EMAIL_REPLY_TO = os.environ.get("EMAIL_REPLY_TO")
+
+_SHORTENERS = ("bit.ly", "tinyurl.com", "t.co", "is.gd", "cutt.ly", "goo.gl", "rebrand.ly")
+_CRED_ASK = ("reply with your password", "reply with the code", "send your password", "cvv",
+             "send us your password", "enter your password below", "confirm your card number",
+             "your full card number", "seed phrase", "recovery phrase", "verify your card",
+             "social security number", "confirm your bank details")
+_HOSTISH = re.compile(r"\b(?:https?://)?((?:[a-z0-9-]+\.)+[a-z]{2,})", re.I)
+
+
+def _host_ok(host: str) -> bool:
+    if not host or "xn--" in host:
+        return False
+    try:
+        ipaddress.ip_address(host)
+        return False
+    except ValueError:
+        pass
+    return not any(host == s or host.endswith("." + s) for s in _SHORTENERS)
+
+
+def _same_site(shown: str, real: str) -> bool:
+    return shown == real or real.endswith("." + shown) or shown.endswith("." + real)
+
+
+class _EmailScan(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.tags, self.urls, self.anchors = set(), [], []
+        self._href, self._text = None, []
+    def handle_starttag(self, tag, attrs):
+        self.tags.add(tag.lower())
+        self.urls += [v for k, v in attrs if k.lower() in ("href", "src") and v]
+        if tag.lower() == "a":
+            self._href = dict((k.lower(), v) for k, v in attrs).get("href")
+            self._text = []
+    def handle_data(self, data):
+        if self._href is not None:
+            self._text.append(data)
+    def handle_endtag(self, tag):
+        if tag.lower() == "a" and self._href is not None:
+            self.anchors.append((self._href, "".join(self._text)))
+            self._href, self._text = None, []
+
+
+def _assert_safe_email(subject: str, html: str) -> None:
+    scan = _EmailScan(); scan.feed(html)
+    if scan.tags & {"form", "input", "textarea", "select"}:
+        raise ValueError("No forms or input fields in email (G2)")
+    body = f"{subject}\n{html}".lower()
+    for p in _CRED_ASK:
+        if p in body:
+            raise ValueError(f"Email asks the recipient for credentials: {p!r} (G2)")
+    for url in scan.urls:
+        low = url.strip().lower()
+        if low.startswith(("mailto:", "tel:", "cid:", "#")):
+            continue
+        if not low.startswith("https://"):
+            raise ValueError(f"Email links/assets must be absolute https: {url!r} (G3)")
+        host = urlparse(low).hostname or ""
+        if not _host_ok(host) or urlparse(low).username is not None:
+            raise ValueError(f"Shortened, numeric-host or credential-bearing URL: {url!r} (G3)")
+    for href, text in scan.anchors:
+        real = urlparse(href.strip().lower()).hostname or ""
+        if not real:
+            continue
+        for m in _HOSTISH.finditer(text):
+            if not _same_site(m.group(1).lower(), real):
+                raise ValueError(f"Anchor text {m.group(1)!r} ≠ real link host {real!r} (G3)")
+
+
+async def send_email(*, to: str, subject: str, html: str, reply_to: str | None = None) -> str | None:
+    _assert_safe_email(subject, html)
+    payload = {"to": [to], "subject": subject, "html": html, "from_name": EMAIL_FROM_NAME}
+    if reply_to or EMAIL_REPLY_TO:
+        payload["contact_email"] = reply_to or EMAIL_REPLY_TO
+    async with httpx.AsyncClient(timeout=30) as client:
+        resp = await client.post(
+            f"{EMAIL_BASE_URL}/api/v1/email/send",
+            headers={"X-Email-Key": EMAIL_KEY},
+            json=payload,
+        )
+    resp.raise_for_status()
+    return resp.json().get("id")
+
+
+def build_lead_email_html(lead: dict) -> str:
+    services = ", ".join(lead.get("services") or []) or "—"
+    rows = [
+        ("Nome", lead.get("name", "")),
+        ("Empresa", lead.get("company") or "—"),
+        ("E-mail", lead.get("email", "")),
+        ("WhatsApp", lead.get("whatsapp", "")),
+        ("Serviços desejados", services),
+        ("Orçamento estimado", lead.get("budget") or "—"),
+        ("Descrição do projeto", lead.get("description", "")),
+    ]
+    rows_html = "".join(
+        f'<tr><td style="padding:10px 14px;font-family:Arial,sans-serif;font-size:13px;font-weight:bold;'
+        f'color:#171717;border-bottom:1px solid #eee;vertical-align:top;white-space:nowrap">{escape(k)}</td>'
+        f'<td style="padding:10px 14px;font-family:Arial,sans-serif;font-size:13px;color:#444;'
+        f'border-bottom:1px solid #eee">{escape(str(v))}</td></tr>'
+        for k, v in rows
+    )
+    return (
+        '<table role="presentation" width="100%" style="background:#fafafa;padding:24px 0"><tr><td align="center">'
+        '<table role="presentation" width="600" style="background:#ffffff;border:1px solid #eee;border-radius:8px;overflow:hidden">'
+        '<tr><td style="background:#0a0a0a;padding:20px 24px;font-family:Arial,sans-serif;font-size:16px;font-weight:bold;color:#ffffff">'
+        f'Novo pedido de orçamento — {escape(EMAIL_FROM_NAME)}</td></tr>'
+        f'<tr><td style="padding:16px 24px 0;font-family:Arial,sans-serif;font-size:14px;color:#444">'
+        'Um visitante acabou de enviar o formulário de contato do site. Detalhes abaixo:</td></tr>'
+        f'<tr><td style="padding:16px 24px"><table role="presentation" width="100%" style="border-collapse:collapse">{rows_html}</table></td></tr>'
+        '<tr><td style="padding:16px 24px;font-family:Arial,sans-serif;font-size:12px;color:#888;border-top:1px solid #eee">'
+        f'Enviado automaticamente pelo site da {escape(EMAIL_FROM_NAME)}. Responda diretamente para o remetente entrar em contato com o cliente.</td></tr>'
+        '</table></td></tr></table>'
+    )
 
 app = FastAPI(title="Borcioni Design API")
 api_router = APIRouter(prefix="/api")
@@ -267,7 +395,27 @@ async def create_lead(input: LeadIn):
     doc = input.model_dump()
     doc.update({"id": new_id(), "read": False, "created_at": now_iso()})
     await db.leads.insert_one(doc)
+    asyncio.create_task(notify_lead_email(doc))
     return {"message": "Recebemos seu contato. Retornaremos em breve!", "id": doc["id"]}
+
+
+async def notify_lead_email(lead: dict) -> None:
+    """Envia aviso ao dono do site sobre novo lead. Falhas de e-mail nunca quebram o lead."""
+    try:
+        settings = await db.settings.find_one({"key": "site"}, {"_id": 0}) or DEFAULT_SETTINGS
+        recipient = settings.get("email") or EMAIL_REPLY_TO
+        if not recipient:
+            logger.warning("E-mail de notificação sem destinatário configurado")
+            return
+        subject = f"Novo contato pelo site: {lead.get('name', '')}"
+        email_id = await send_email(
+            to=recipient,
+            subject=subject,
+            html=build_lead_email_html(lead),
+        )
+        logger.info("Notificação de lead enviada para %s (id=%s)", recipient, email_id)
+    except Exception as e:
+        logger.error("Falha ao enviar notificação de lead: %s", e)
 
 
 # ---------------------------------------------------------------------------

@@ -13,6 +13,8 @@ Site institucional profissional e responsivo para a Borcioni Design (Sapiranga/R
 - Logos oficiais em /app/frontend/public/assets/ (logo-h-branca, logo-v-roxa/preta/branca, logo-redes).
 
 ## Implementado (2026-10-23)
+- Notificação por e-mail: cada novo lead dispara e-mail automático (Resend gerenciado Emergent) para borcionidesign@gmail.com, com todos os dados do formulário; falha de e-mail nunca quebra o envio do lead.
+- Redes sociais ativas no rodapé: Instagram e Facebook (@borcionidesign), configuráveis no painel.
 - 7 páginas públicas + /admin (login) + /admin/painel (dashboard).
 - Home: hero escuro com slogan "Marcas que comunicam. Ideias que permanecem.", CTAs, faixa "Mais valor, menos preço", preview de serviços (bento com destaque supermercados), portfólio em destaque, depoimentos, CTA final.
 - Serviços: 9 serviços seeded; bloco especial roxo de Publicidade para Supermercados (ofertas semanais, encartes digitais, campanhas, chamadas promocionais, divulgação multicanal).
@@ -25,8 +27,8 @@ Site institucional profissional e responsivo para a Borcioni Design (Sapiranga/R
 - Banco: MongoDB via MONGO_URL; senhas com bcrypt; endpoints admin protegidos (401 sem token).
 
 ## Backlog priorizado
-- P0: trocar fallback Montserrat por Gotham quando os arquivos licenciados forem enviados; URLs reais das redes sociais; conteúdo real (projetos/depoimentos).
-- P1: galeria multi-imagem com upload de arquivo (hoje por URL), busca no portfólio, notificação por e-mail a cada novo lead (Resend), sitemap.xml e robots.txt avançados.
+- P0: trocar fallback Montserrat por Gotham quando os arquivos licenciados forem enviados; URL do LinkedIn; conteúdo real (projetos/depoimentos).
+- P1: galeria multi-imagem com upload de arquivo (hoje por URL), busca no portfólio, sitemap.xml e robots.txt avançados.
 - P2: área do cliente, agendamento de briefing, relatórios de leads, versão em inglês.
 
 ## Credenciais
