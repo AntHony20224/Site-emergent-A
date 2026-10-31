@@ -18,7 +18,7 @@ export default function ProjectDetail() {
       <main className="bg-white min-h-screen pt-40 pb-24" data-testid="project-not-found">
         <div className="max-w-3xl mx-auto px-5 text-center">
           <h1 className="font-display text-3xl font-black text-[#171717] mb-4">Projeto não encontrado</h1>
-          <Link to="/portfolio" className="font-ui font-bold text-[#9333EA]">Voltar ao portfólio</Link>
+          <Link to="/portfolio" className="font-ui font-bold text-[#0A0A0A]">Voltar ao portfólio</Link>
         </div>
       </main>
     );
@@ -41,7 +41,7 @@ export default function ProjectDetail() {
           <Link to="/portfolio" className="inline-flex items-center gap-2 font-ui text-sm font-bold text-white/70 hover:text-white transition-colors mb-8" data-testid="project-back-link">
             <ArrowLeft size={16} /> Voltar ao portfólio
           </Link>
-          <p className="font-ui text-xs font-extrabold tracking-[0.2em] uppercase text-[#A855F7] mb-3">{project.category}</p>
+          <p className="font-ui text-xs font-extrabold tracking-[0.2em] uppercase text-[#FFFFFF] mb-3">{project.category}</p>
           <h1 className="font-display text-3xl sm:text-5xl font-black tracking-tighter text-white leading-[1.05]" data-testid="project-title">
             {project.title}
           </h1>
@@ -65,7 +65,7 @@ export default function ProjectDetail() {
               </div>
             )}
             {project.solution && (
-              <div className="bg-[#9333EA]/5 border border-[#9333EA]/20 rounded-lg p-8">
+              <div className="bg-[#0A0A0A]/5 border border-[#0A0A0A]/20 rounded-lg p-8">
                 <h2 className="font-sub text-xl font-semibold text-[#171717] mb-3">Solução</h2>
                 <p className="text-[#525252] leading-relaxed" data-testid="project-solution">{project.solution}</p>
               </div>
@@ -91,7 +91,7 @@ export default function ProjectDetail() {
             <Link
               to="/contato"
               data-testid="project-cta-orcamento"
-              className="inline-flex items-center gap-2 font-ui font-extrabold text-sm bg-[#9333EA] text-white rounded-full px-8 py-4 hover:bg-[#A855F7] transition-colors duration-200 active:scale-95"
+              className="inline-flex items-center gap-2 font-ui font-extrabold text-sm bg-white text-black rounded-full px-8 py-4 hover:bg-neutral-200 transition-colors duration-200 active:scale-95"
             >
               Solicitar orçamento <ArrowRight size={16} />
             </Link>

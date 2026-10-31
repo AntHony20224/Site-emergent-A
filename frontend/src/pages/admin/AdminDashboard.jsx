@@ -11,6 +11,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { SocialTab } from "./SocialTab";
+import { PostsPanel } from "./PostsPanel";
 
 const inputCls = "font-ui";
 const labelCls = "block font-ui text-sm font-bold mb-1.5";
@@ -60,7 +62,7 @@ function ProjectsTab() {
         <h2 className="font-sub text-lg font-semibold">Projetos ({items.length})</h2>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button onClick={openNew} className="font-ui font-bold bg-[#9333EA] hover:bg-[#7E22CE] rounded-full" data-testid="admin-project-new-button"><Plus size={16} /> Novo projeto</Button>
+            <Button onClick={openNew} className="font-ui font-bold bg-[#0A0A0A] hover:bg-[#262626] rounded-full" data-testid="admin-project-new-button"><Plus size={16} /> Novo projeto</Button>
           </DialogTrigger>
           <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto" data-testid="admin-project-dialog">
             <DialogHeader><DialogTitle className="font-display">{editing ? "Editar projeto" : "Novo projeto"}</DialogTitle></DialogHeader>
@@ -76,7 +78,7 @@ function ProjectsTab() {
                 <label className="flex items-center gap-2 font-ui text-sm font-bold"><input type="checkbox" checked={form.is_demo} onChange={(e) => setForm({ ...form, is_demo: e.target.checked })} data-testid="project-form-demo" /> Demonstrativo</label>
                 <label className="flex items-center gap-2 font-ui text-sm font-bold"><input type="checkbox" checked={form.featured} onChange={(e) => setForm({ ...form, featured: e.target.checked })} data-testid="project-form-featured" /> Destaque na home</label>
               </div>
-              <Button type="submit" className="font-ui font-bold bg-[#9333EA] hover:bg-[#7E22CE] rounded-full w-full" data-testid="project-form-submit">Salvar projeto</Button>
+              <Button type="submit" className="font-ui font-bold bg-[#0A0A0A] hover:bg-[#262626] rounded-full w-full" data-testid="project-form-submit">Salvar projeto</Button>
             </form>
           </DialogContent>
         </Dialog>
@@ -94,7 +96,7 @@ function ProjectsTab() {
                 <td className="p-4 hidden md:table-cell text-neutral-500">{p.category}</td>
                 <td className="p-4 hidden sm:table-cell space-x-2">
                   {p.is_demo && <Badge variant="secondary" className="font-ui">Demonstrativo</Badge>}
-                  {p.featured && <Badge className="font-ui bg-[#9333EA]">Destaque</Badge>}
+                  {p.featured && <Badge className="font-ui bg-[#0A0A0A]">Destaque</Badge>}
                 </td>
                 <td className="p-4 text-right space-x-1">
                   <Button size="icon" variant="ghost" onClick={() => openEdit(p)} aria-label={`Editar ${p.title}`} data-testid={`admin-project-edit-${p.id}`}><Pencil size={16} /></Button>
@@ -150,7 +152,7 @@ function ServicesTab() {
         <h2 className="font-sub text-lg font-semibold">Serviços ({items.length})</h2>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button onClick={openNew} className="font-ui font-bold bg-[#9333EA] hover:bg-[#7E22CE] rounded-full" data-testid="admin-service-new-button"><Plus size={16} /> Novo serviço</Button>
+            <Button onClick={openNew} className="font-ui font-bold bg-[#0A0A0A] hover:bg-[#262626] rounded-full" data-testid="admin-service-new-button"><Plus size={16} /> Novo serviço</Button>
           </DialogTrigger>
           <DialogContent className="max-w-xl max-h-[90vh] overflow-y-auto" data-testid="admin-service-dialog">
             <DialogHeader><DialogTitle className="font-display">{editing ? "Editar serviço" : "Novo serviço"}</DialogTitle></DialogHeader>
@@ -165,7 +167,7 @@ function ServicesTab() {
               </div>
               <Field label="Itens de destaque (um por linha)"><Textarea className={inputCls} rows={3} value={form.itemsText} onChange={(e) => setForm({ ...form, itemsText: e.target.value })} data-testid="service-form-items" /></Field>
               <label className="flex items-center gap-2 font-ui text-sm font-bold"><input type="checkbox" checked={form.highlight} onChange={(e) => setForm({ ...form, highlight: e.target.checked })} data-testid="service-form-highlight" /> Destaque especial (ex.: supermercados)</label>
-              <Button type="submit" className="font-ui font-bold bg-[#9333EA] hover:bg-[#7E22CE] rounded-full w-full" data-testid="service-form-submit">Salvar serviço</Button>
+              <Button type="submit" className="font-ui font-bold bg-[#0A0A0A] hover:bg-[#262626] rounded-full w-full" data-testid="service-form-submit">Salvar serviço</Button>
             </form>
           </DialogContent>
         </Dialog>
@@ -181,7 +183,7 @@ function ServicesTab() {
               <tr key={s.id} className="border-b last:border-0" data-testid={`admin-service-row-${s.id}`}>
                 <td className="p-4 font-ui font-bold">{s.title}</td>
                 <td className="p-4 hidden sm:table-cell text-neutral-500">{s.order}</td>
-                <td className="p-4 hidden sm:table-cell">{s.highlight && <Badge className="font-ui bg-[#9333EA]">Especial</Badge>}</td>
+                <td className="p-4 hidden sm:table-cell">{s.highlight && <Badge className="font-ui bg-[#0A0A0A]">Especial</Badge>}</td>
                 <td className="p-4 text-right space-x-1">
                   <Button size="icon" variant="ghost" onClick={() => openEdit(s)} aria-label={`Editar ${s.title}`} data-testid={`admin-service-edit-${s.id}`}><Pencil size={16} /></Button>
                   <Button size="icon" variant="ghost" onClick={() => remove(s)} aria-label={`Remover ${s.title}`} data-testid={`admin-service-delete-${s.id}`}><Trash2 size={16} className="text-red-500" /></Button>
@@ -198,7 +200,7 @@ function ServicesTab() {
 // ---------------------------------------------------------------------------
 // Depoimentos
 // ---------------------------------------------------------------------------
-const emptyTestimonial = { name: "", company: "", text: "", authorized: false };
+const emptyTestimonial = { name: "", company: "", text: "", authorized: false, rating: 5, verified: false };
 
 function TestimonialsTab() {
   const [items, setItems] = useState([]);
@@ -210,7 +212,7 @@ function TestimonialsTab() {
   useEffect(() => { load(); }, [load]);
 
   const openNew = () => { setEditing(null); setForm(emptyTestimonial); setOpen(true); };
-  const openEdit = (t) => { setEditing(t); setForm({ name: t.name, company: t.company, text: t.text, authorized: t.authorized }); setOpen(true); };
+  const openEdit = (t) => { setEditing(t); setForm({ name: t.name, company: t.company, text: t.text, authorized: t.authorized, rating: t.rating || 5, verified: !!t.verified }); setOpen(true); };
 
   const save = async (e) => {
     e.preventDefault();
@@ -236,7 +238,7 @@ function TestimonialsTab() {
         </div>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button onClick={openNew} className="font-ui font-bold bg-[#9333EA] hover:bg-[#7E22CE] rounded-full" data-testid="admin-testimonial-new-button"><Plus size={16} /> Novo depoimento</Button>
+            <Button onClick={openNew} className="font-ui font-bold bg-[#0A0A0A] hover:bg-[#262626] rounded-full" data-testid="admin-testimonial-new-button"><Plus size={16} /> Novo depoimento</Button>
           </DialogTrigger>
           <DialogContent className="max-w-xl" data-testid="admin-testimonial-dialog">
             <DialogHeader><DialogTitle className="font-display">{editing ? "Editar depoimento" : "Novo depoimento"}</DialogTitle></DialogHeader>
@@ -244,8 +246,14 @@ function TestimonialsTab() {
               <Field label="Nome do cliente *"><Input required className={inputCls} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} data-testid="testimonial-form-name" /></Field>
               <Field label="Empresa"><Input className={inputCls} value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} data-testid="testimonial-form-company" /></Field>
               <Field label="Depoimento *"><Textarea required className={inputCls} rows={4} value={form.text} onChange={(e) => setForm({ ...form, text: e.target.value })} data-testid="testimonial-form-text" /></Field>
+              <Field label="Nota (1 a 5 estrelas)">
+                <select className="w-full font-ui text-sm rounded-lg border border-black/15 px-4 py-3" value={form.rating} onChange={(e) => setForm({ ...form, rating: Number(e.target.value) })} data-testid="testimonial-form-rating">
+                  {[5, 4, 3, 2, 1].map((n) => <option key={n} value={n}>{n} estrela{n > 1 ? "s" : ""}</option>)}
+                </select>
+              </Field>
+              <label className="flex items-center gap-2 font-ui text-sm font-bold"><input type="checkbox" checked={form.verified} onChange={(e) => setForm({ ...form, verified: e.target.checked })} data-testid="testimonial-form-verified" /> Avaliação verificada (identidade comprovada)</label>
               <label className="flex items-center gap-2 font-ui text-sm font-bold"><input type="checkbox" checked={form.authorized} onChange={(e) => setForm({ ...form, authorized: e.target.checked })} data-testid="testimonial-form-authorized" /> Cliente autorizou a publicação</label>
-              <Button type="submit" className="font-ui font-bold bg-[#9333EA] hover:bg-[#7E22CE] rounded-full w-full" data-testid="testimonial-form-submit">Salvar depoimento</Button>
+              <Button type="submit" className="font-ui font-bold bg-[#0A0A0A] hover:bg-[#262626] rounded-full w-full" data-testid="testimonial-form-submit">Salvar depoimento</Button>
             </form>
           </DialogContent>
         </Dialog>
@@ -259,7 +267,7 @@ function TestimonialsTab() {
           <tbody>
             {items.map((t) => (
               <tr key={t.id} className="border-b last:border-0" data-testid={`admin-testimonial-row-${t.id}`}>
-                <td className="p-4"><span className="font-ui font-bold">{t.name}</span>{t.company && <span className="text-neutral-500"> — {t.company}</span>}</td>
+                <td className="p-4"><span className="font-ui font-bold">{t.name}</span>{t.company && <span className="text-neutral-500"> — {t.company}</span>}{t.rating ? <span className="text-neutral-500 text-xs"> · {t.rating}★</span> : null}</td>
                 <td className="p-4 hidden md:table-cell">{t.authorized ? <Badge className="font-ui bg-green-600">Autorizado</Badge> : <Badge variant="secondary" className="font-ui">Oculto</Badge>}</td>
                 <td className="p-4 text-right space-x-1">
                   <Button size="icon" variant="ghost" onClick={() => openEdit(t)} aria-label={`Editar depoimento de ${t.name}`} data-testid={`admin-testimonial-edit-${t.id}`}><Pencil size={16} /></Button>
@@ -311,11 +319,11 @@ function LeadsTab() {
           </tr></thead>
           <tbody>
             {items.map((l) => (
-              <tr key={l.id} className={`border-b last:border-0 ${!l.read ? "bg-[#9333EA]/5" : ""}`} data-testid={`admin-lead-row-${l.id}`}>
+              <tr key={l.id} className={`border-b last:border-0 ${!l.read ? "bg-[#0A0A0A]/5" : ""}`} data-testid={`admin-lead-row-${l.id}`}>
                 <td className="p-4 font-ui font-bold">{l.name}</td>
                 <td className="p-4 hidden md:table-cell text-neutral-500">{l.company || "—"}</td>
                 <td className="p-4 hidden lg:table-cell text-neutral-500">{new Date(l.created_at).toLocaleString("pt-BR")}</td>
-                <td className="p-4 hidden sm:table-cell">{l.read ? <Badge variant="secondary" className="font-ui">Lido</Badge> : <Badge className="font-ui bg-[#9333EA]">Novo</Badge>}</td>
+                <td className="p-4 hidden sm:table-cell">{l.read ? <Badge variant="secondary" className="font-ui">Lido</Badge> : <Badge className="font-ui bg-[#0A0A0A]">Novo</Badge>}</td>
                 <td className="p-4 text-right space-x-1">
                   <Button size="icon" variant="ghost" onClick={() => openDetail(l)} aria-label={`Ver contato de ${l.name}`} data-testid={`admin-lead-view-${l.id}`}><Eye size={16} /></Button>
                   <Button size="icon" variant="ghost" onClick={() => remove(l)} aria-label={`Remover contato de ${l.name}`} data-testid={`admin-lead-delete-${l.id}`}><Trash2 size={16} className="text-red-500" /></Button>
@@ -334,7 +342,7 @@ function LeadsTab() {
               <DialogHeader><DialogTitle className="font-display">Contato de {selected.name}</DialogTitle></DialogHeader>
               <dl className="space-y-3 text-sm font-ui">
                 <div><dt className="font-extrabold">Empresa</dt><dd>{selected.company || "—"}</dd></div>
-                <div><dt className="font-extrabold">E-mail</dt><dd><a className="text-[#9333EA] underline" href={`mailto:${selected.email}`}>{selected.email}</a></dd></div>
+                <div><dt className="font-extrabold">E-mail</dt><dd><a className="text-[#0A0A0A] underline" href={`mailto:${selected.email}`}>{selected.email}</a></dd></div>
                 <div><dt className="font-extrabold">WhatsApp</dt><dd>{selected.whatsapp}</dd></div>
                 <div><dt className="font-extrabold">Serviços desejados</dt><dd>{selected.services?.length ? selected.services.join(", ") : "—"}</dd></div>
                 <div><dt className="font-extrabold">Orçamento</dt><dd>{selected.budget || "—"}</dd></div>
@@ -372,11 +380,8 @@ function SettingsTab() {
       <Field label="WhatsApp — número com DDI (apenas dígitos, ex.: 5551998893041)"><Input className={inputCls} value={form.whatsapp_number} onChange={(e) => setForm({ ...form, whatsapp_number: e.target.value })} data-testid="settings-whatsapp-number" /></Field>
       <Field label="WhatsApp — exibição (ex.: (51) 99889-3041)"><Input className={inputCls} value={form.whatsapp_display} onChange={(e) => setForm({ ...form, whatsapp_display: e.target.value })} data-testid="settings-whatsapp-display" /></Field>
       <Field label="E-mail de contato"><Input type="email" className={inputCls} value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} data-testid="settings-email" /></Field>
-      <Field label="Instagram (URL completa)"><Input className={inputCls} placeholder="https://instagram.com/…" value={form.instagram} onChange={(e) => setForm({ ...form, instagram: e.target.value })} data-testid="settings-instagram" /></Field>
-      <Field label="Facebook (URL completa)"><Input className={inputCls} placeholder="https://facebook.com/…" value={form.facebook} onChange={(e) => setForm({ ...form, facebook: e.target.value })} data-testid="settings-facebook" /></Field>
-      <Field label="LinkedIn (URL completa)"><Input className={inputCls} placeholder="https://linkedin.com/…" value={form.linkedin} onChange={(e) => setForm({ ...form, linkedin: e.target.value })} data-testid="settings-linkedin" /></Field>
-      <Field label="Behance (URL completa)"><Input className={inputCls} placeholder="https://behance.net/…" value={form.behance} onChange={(e) => setForm({ ...form, behance: e.target.value })} data-testid="settings-behance" /></Field>
-      <Button type="submit" className="font-ui font-bold bg-[#9333EA] hover:bg-[#7E22CE] rounded-full" data-testid="settings-submit">Salvar configurações</Button>
+      <p className="text-xs text-neutral-500">Redes sociais agora são gerenciadas na aba <strong>Redes sociais</strong>.</p>
+      <Button type="submit" className="font-ui font-bold bg-[#0A0A0A] hover:bg-[#262626] rounded-full" data-testid="settings-submit">Salvar configurações</Button>
     </form>
   );
 }
@@ -420,12 +425,16 @@ export default function AdminDashboard() {
             <TabsTrigger value="services" data-testid="admin-tab-services">Serviços</TabsTrigger>
             <TabsTrigger value="testimonials" data-testid="admin-tab-testimonials">Depoimentos</TabsTrigger>
             <TabsTrigger value="leads" data-testid="admin-tab-leads">Contatos</TabsTrigger>
+            <TabsTrigger value="social" data-testid="admin-tab-social">Redes sociais</TabsTrigger>
+            <TabsTrigger value="posts" data-testid="admin-tab-posts">Painel do Posts</TabsTrigger>
             <TabsTrigger value="settings" data-testid="admin-tab-settings">Configurações</TabsTrigger>
           </TabsList>
           <TabsContent value="projects"><ProjectsTab /></TabsContent>
           <TabsContent value="services"><ServicesTab /></TabsContent>
           <TabsContent value="testimonials"><TestimonialsTab /></TabsContent>
           <TabsContent value="leads"><LeadsTab /></TabsContent>
+          <TabsContent value="social"><SocialTab /></TabsContent>
+          <TabsContent value="posts"><PostsPanel /></TabsContent>
           <TabsContent value="settings"><SettingsTab /></TabsContent>
         </Tabs>
       </div>

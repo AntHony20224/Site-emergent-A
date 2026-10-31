@@ -1,125 +1,36 @@
-from dotenv import load_dotenv
-load_dotenv()
-
 import os
-import uuid
 import logging
-from pathlib import Path
-from datetime import datetime, timezone, timedelta
+import asyncio
+from html import escape
 from typing import List, Optional
 
-import bcrypt
-import jwt
-import re
-import ipaddress
-import asyncio
-import httpx
-from html import escape
-from html.parser import HTMLParser
-from urllib.parse import urlparse
-from fastapi import FastAPI, APIRouter, HTTPException, Depends
-from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from fastapi import FastAPI, APIRouter, HTTPException, Depends, Request
 from starlette.middleware.cors import CORSMiddleware
-from motor.motor_asyncio import AsyncIOMotorClient
-from pydantic import BaseModel, Field, EmailStr
+from pydantic import BaseModel, EmailStr
 
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+from database import (
+    db, client, now_iso, new_id, hash_password, verify_password,
+    create_token, get_current_admin,
+)
+from mailer import send_email, EMAIL_FROM_NAME, EMAIL_REPLY_TO
 
-JWT_SECRET = os.environ['JWT_SECRET']
-JWT_ALGORITHM = "HS256"
-TOKEN_TTL_HOURS = 12
+app = FastAPI(title="Borcioni Design API")
+api_router = APIRouter(prefix="/api")
 
-# Emergent managed email (proxy constant — never read from env)
-EMAIL_BASE_URL = "https://integrations.emergentagent.com"
-EMAIL_KEY = os.environ["EMERGENT_EMAIL_KEY"]
-EMAIL_FROM_NAME = os.environ["EMAIL_FROM_NAME"]
-EMAIL_REPLY_TO = os.environ.get("EMAIL_REPLY_TO")
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
-_SHORTENERS = ("bit.ly", "tinyurl.com", "t.co", "is.gd", "cutt.ly", "goo.gl", "rebrand.ly")
-_CRED_ASK = ("reply with your password", "reply with the code", "send your password", "cvv",
-             "send us your password", "enter your password below", "confirm your card number",
-             "your full card number", "seed phrase", "recovery phrase", "verify your card",
-             "social security number", "confirm your bank details")
-_HOSTISH = re.compile(r"\b(?:https?://)?((?:[a-z0-9-]+\.)+[a-z]{2,})", re.I)
+# Anti-spam simples em memória (por chave, janela em segundos)
+_hits: dict = {}
 
-
-def _host_ok(host: str) -> bool:
-    if not host or "xn--" in host:
-        return False
-    try:
-        ipaddress.ip_address(host)
-        return False
-    except ValueError:
-        pass
-    return not any(host == s or host.endswith("." + s) for s in _SHORTENERS)
-
-
-def _same_site(shown: str, real: str) -> bool:
-    return shown == real or real.endswith("." + shown) or shown.endswith("." + real)
-
-
-class _EmailScan(HTMLParser):
-    def __init__(self):
-        super().__init__()
-        self.tags, self.urls, self.anchors = set(), [], []
-        self._href, self._text = None, []
-    def handle_starttag(self, tag, attrs):
-        self.tags.add(tag.lower())
-        self.urls += [v for k, v in attrs if k.lower() in ("href", "src") and v]
-        if tag.lower() == "a":
-            self._href = dict((k.lower(), v) for k, v in attrs).get("href")
-            self._text = []
-    def handle_data(self, data):
-        if self._href is not None:
-            self._text.append(data)
-    def handle_endtag(self, tag):
-        if tag.lower() == "a" and self._href is not None:
-            self.anchors.append((self._href, "".join(self._text)))
-            self._href, self._text = None, []
-
-
-def _assert_safe_email(subject: str, html: str) -> None:
-    scan = _EmailScan(); scan.feed(html)
-    if scan.tags & {"form", "input", "textarea", "select"}:
-        raise ValueError("No forms or input fields in email (G2)")
-    body = f"{subject}\n{html}".lower()
-    for p in _CRED_ASK:
-        if p in body:
-            raise ValueError(f"Email asks the recipient for credentials: {p!r} (G2)")
-    for url in scan.urls:
-        low = url.strip().lower()
-        if low.startswith(("mailto:", "tel:", "cid:", "#")):
-            continue
-        if not low.startswith("https://"):
-            raise ValueError(f"Email links/assets must be absolute https: {url!r} (G3)")
-        host = urlparse(low).hostname or ""
-        if not _host_ok(host) or urlparse(low).username is not None:
-            raise ValueError(f"Shortened, numeric-host or credential-bearing URL: {url!r} (G3)")
-    for href, text in scan.anchors:
-        real = urlparse(href.strip().lower()).hostname or ""
-        if not real:
-            continue
-        for m in _HOSTISH.finditer(text):
-            if not _same_site(m.group(1).lower(), real):
-                raise ValueError(f"Anchor text {m.group(1)!r} ≠ real link host {real!r} (G3)")
-
-
-async def send_email(*, to: str, subject: str, html: str, reply_to: str | None = None) -> str | None:
-    _assert_safe_email(subject, html)
-    payload = {"to": [to], "subject": subject, "html": html, "from_name": EMAIL_FROM_NAME}
-    if reply_to or EMAIL_REPLY_TO:
-        payload["contact_email"] = reply_to or EMAIL_REPLY_TO
-    async with httpx.AsyncClient(timeout=30) as client:
-        resp = await client.post(
-            f"{EMAIL_BASE_URL}/api/v1/email/send",
-            headers={"X-Email-Key": EMAIL_KEY},
-            json=payload,
-        )
-    resp.raise_for_status()
-    return resp.json().get("id")
+def rate_limit(key: str, max_hits: int, window: int) -> None:
+    import time
+    now = time.time()
+    lst = [t for t in _hits.get(key, []) if now - t < window]
+    if len(lst) >= max_hits:
+        raise HTTPException(status_code=429, detail="Muitas tentativas. Aguarde um pouco.")
+    lst.append(now)
+    _hits[key] = lst
 
 
 def build_lead_email_html(lead: dict) -> str:
@@ -152,62 +63,6 @@ def build_lead_email_html(lead: dict) -> str:
         f'Enviado automaticamente pelo site da {escape(EMAIL_FROM_NAME)}. Responda diretamente para o remetente entrar em contato com o cliente.</td></tr>'
         '</table></td></tr></table>'
     )
-
-app = FastAPI(title="Borcioni Design API")
-api_router = APIRouter(prefix="/api")
-
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
-
-
-def now_iso() -> str:
-    return datetime.now(timezone.utc).isoformat()
-
-
-def new_id() -> str:
-    return str(uuid.uuid4())
-
-
-# ---------------------------------------------------------------------------
-# Auth helpers
-# ---------------------------------------------------------------------------
-
-def hash_password(password: str) -> str:
-    return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
-
-
-def verify_password(plain: str, hashed: str) -> bool:
-    try:
-        return bcrypt.checkpw(plain.encode("utf-8"), hashed.encode("utf-8"))
-    except ValueError:
-        return False
-
-
-def create_token(user_id: str, email: str) -> str:
-    payload = {
-        "sub": user_id,
-        "email": email,
-        "exp": datetime.now(timezone.utc) + timedelta(hours=TOKEN_TTL_HOURS),
-    }
-    return jwt.encode(payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
-
-
-security = HTTPBearer(auto_error=False)
-
-
-async def get_current_admin(creds: HTTPAuthorizationCredentials = Depends(security)) -> dict:
-    if creds is None:
-        raise HTTPException(status_code=401, detail="Não autenticado")
-    try:
-        payload = jwt.decode(creds.credentials, JWT_SECRET, algorithms=[JWT_ALGORITHM])
-    except jwt.ExpiredSignatureError:
-        raise HTTPException(status_code=401, detail="Sessão expirada")
-    except jwt.InvalidTokenError:
-        raise HTTPException(status_code=401, detail="Token inválido")
-    user = await db.users.find_one({"_id": payload["sub"]}, {"_id": 0, "password_hash": 0})
-    if not user:
-        raise HTTPException(status_code=401, detail="Usuário não encontrado")
-    return user
 
 
 # ---------------------------------------------------------------------------
@@ -245,6 +100,16 @@ class TestimonialIn(BaseModel):
     company: str = ""
     text: str
     authorized: bool = False
+    rating: Optional[int] = None
+    verified: bool = False
+    email: str = ""
+
+
+class PublicTestimonialIn(BaseModel):
+    name: str
+    email: EmailStr
+    rating: int
+    text: str
 
 
 class LeadIn(BaseModel):
@@ -387,7 +252,30 @@ async def get_project(project_id: str):
 
 @api_router.get("/testimonials")
 async def list_testimonials():
-    return await db.testimonials.find({"authorized": True}, {"_id": 0}).sort("created_at", -1).to_list(100)
+    return await db.testimonials.find({"authorized": True}, {"_id": 0, "email": 0}).sort("created_at", -1).to_list(100)
+
+
+@api_router.post("/testimonials/public", status_code=201)
+async def submit_testimonial(input: PublicTestimonialIn, request: Request):
+    """Envio público de avaliação: fica pendente até autorização do admin."""
+    rate_limit(f"feedback:{request.client.host}", 3, 3600)
+    if not (1 <= input.rating <= 5):
+        raise HTTPException(status_code=422, detail="Avaliação deve ser de 1 a 5 estrelas")
+    name = input.name.strip()
+    text = input.text.strip()
+    if not (2 <= len(name) <= 60):
+        raise HTTPException(status_code=422, detail="Nome inválido")
+    if not (10 <= len(text) <= 600):
+        raise HTTPException(status_code=422, detail="Comentário deve ter entre 10 e 600 caracteres")
+    email = input.email.lower().strip()
+    if await db.testimonials.count_documents({"email": email, "text": text}):
+        raise HTTPException(status_code=409, detail="Esta avaliação já foi enviada")
+    await db.testimonials.insert_one({
+        "id": new_id(), "name": name, "company": "", "text": text, "email": email,
+        "rating": input.rating, "verified": False, "authorized": False,
+        "created_at": now_iso(),
+    })
+    return {"message": "Avaliação enviada! Ela será publicada após análise e autorização."}
 
 
 @api_router.post("/leads", status_code=201)

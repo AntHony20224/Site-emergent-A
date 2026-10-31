@@ -16,19 +16,19 @@
         --card-foreground: 0 0% 9%;
         --popover: 0 0% 100%;
         --popover-foreground: 0 0% 9%;
-        --primary: 273 81% 56%;
+        --primary: 0 0% 4%;
         --primary-foreground: 0 0% 100%;
         --secondary: 0 0% 96.1%;
         --secondary-foreground: 0 0% 9%;
         --muted: 0 0% 96.1%;
         --muted-foreground: 0 0% 32%;
-        --accent: 273 81% 96%;
-        --accent-foreground: 273 81% 40%;
+        --accent: 0 0% 94%;
+        --accent-foreground: 0 0% 15%;
         --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 0 0% 98%;
         --border: 0 0% 89.8%;
         --input: 0 0% 85%;
-        --ring: 273 81% 56%;
+        --ring: 0 0% 20%;
         --radius: 0.5rem;
     }
 }
@@ -45,7 +45,7 @@
         font-family: 'Nunito', sans-serif;
     }
     ::selection {
-        background-color: #9333ea;
+        background-color: #0a0a0a;
         color: #ffffff;
     }
 }

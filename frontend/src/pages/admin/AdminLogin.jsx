@@ -52,7 +52,7 @@ export default function AdminLogin() {
             type="submit"
             disabled={loading}
             data-testid="admin-login-submit"
-            className="w-full font-ui font-extrabold text-sm bg-[#9333EA] text-white rounded-full px-6 py-3.5 hover:bg-[#A855F7] transition-colors duration-200 active:scale-95 disabled:opacity-60 flex items-center justify-center gap-2"
+            className="w-full font-ui font-extrabold text-sm bg-white text-black rounded-full px-6 py-3.5 hover:bg-neutral-200 transition-colors duration-200 active:scale-95 disabled:opacity-60 flex items-center justify-center gap-2"
           >
             <LogIn size={16} /> {loading ? "Entrando…" : "Entrar"}
           </button>

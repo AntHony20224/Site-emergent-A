@@ -1,6 +1,6 @@
-import { MessageCircle } from "lucide-react";
 import { useSite } from "@/context/SiteContext";
 import { whatsappUrl } from "@/lib/api";
+import { BrandIcon } from "@/components/BrandIcons";
 
 export function WhatsAppFab() {
   const { settings } = useSite();
@@ -15,7 +15,7 @@ export function WhatsAppFab() {
       data-testid="whatsapp-fab"
       className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-md hover:bg-[#1EBE5B] transition-colors duration-200"
     >
-      <MessageCircle size={26} fill="currentColor" />
+      <BrandIcon name="whatsapp" size={26} />
     </a>
   );
 }
